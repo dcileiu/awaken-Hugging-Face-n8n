@@ -2,13 +2,20 @@ name: Wake up Hugging Face Space
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # UTC 时间每天 00:00，相当于你本地每天定时
+    - cron: '0 0 * * *'  # UTC 时间每天 00:00，可根据你本地时间调整
   workflow_dispatch:   # 可手动触发
 
 jobs:
   wake-up:
     runs-on: ubuntu-latest
     steps:
-      - name: Curl to wake up Space
+      - name: Wake up Hugging Face Space
         run: |
-          curl -s https://itianci-n8n.hf.space > /dev/null
+          echo "=== Start waking up Hugging Face Space ==="
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://itianci-n8n.hf.space)
+          if [ "$STATUS" -eq 200 ]; then
+            echo "✅ Space is awake! HTTP status code: $STATUS"
+          else
+            echo "⚠️ Failed to wake up Space. HTTP status code: $STATUS"
+          fi
+          echo "=== Finished ==="
