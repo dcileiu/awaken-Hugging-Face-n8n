@@ -1,0 +1,14 @@
+name: Wake up Hugging Face Space
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # UTC 时间每天 00:00，相当于你本地每天定时
+  workflow_dispatch:   # 可手动触发
+
+jobs:
+  wake-up:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Curl to wake up Space
+        run: |
+          curl -s https://itianci-n8n.hf.space/ > /dev/null
