@@ -15,6 +15,6 @@ jobs:
           curl -s -o /dev/null -w "Space1 HTTP status: %{http_code}\n" https://itianci-n8n.hf.space
 
           echo "=== Wake up Space 2 ==="
-          curl -s -o /dev/null -w "Space2 HTTP status: %{http_code}\n" https://a123123sd-n8n.hf.space
+          curl -s -o /dev/null -w "Space2 HTTP status: %{http_code}\n" https://a123123sd-n8n-free.hf.space
 
           echo "=== Done ==="
