@@ -1,38 +1,38 @@
-name: Wake up Hugging Face Spaces
+# name: Wake up Hugging Face Spaces 用不上了
 
-on:
-  schedule:
-    - cron: '0 0 * * *'
-  workflow_dispatch:
+# on:
+#   schedule:
+#     - cron: '0 0 * * *'
+#   workflow_dispatch:
 
-jobs:
-  wake-up:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Wake up Spaces with retries
-        run: |
-          wake_space() {
-            URL=$1
-            NAME=$2
+# jobs:
+#   wake-up:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Wake up Spaces with retries
+#         run: |
+#           wake_space() {
+#             URL=$1
+#             NAME=$2
 
-            echo "=== Waking up $NAME ==="
+#             echo "=== Waking up $NAME ==="
 
-            for i in {1..10}; do
-              STATUS=$(curl -L -s -o /dev/null -w "%{http_code}" "$URL")
-              echo "$NAME attempt $i -> HTTP $STATUS"
+#             for i in {1..10}; do
+#               STATUS=$(curl -L -s -o /dev/null -w "%{http_code}" "$URL")
+#               echo "$NAME attempt $i -> HTTP $STATUS"
 
-              if [ "$STATUS" = "200" ]; then
-                echo "✅ $NAME is fully awake"
-                return 0
-              fi
+#               if [ "$STATUS" = "200" ]; then
+#                 echo "✅ $NAME is fully awake"
+#                 return 0
+#               fi
 
-              echo "$NAME not ready yet, wait 15s..."
-              sleep 15
-            done
+#               echo "$NAME not ready yet, wait 15s..."
+#               sleep 15
+#             done
 
-            echo "❌ $NAME failed to fully wake up after retries"
-            return 1
-          }
+#             echo "❌ $NAME failed to fully wake up after retries"
+#             return 1
+#           }
 
-          wake_space "https://itianci-n8n.hf.space/" "Space1"
-          wake_space "https://a123123sd-n8n-free.hf.space/" "Space2"
+#           wake_space "https://itianci-n8n.hf.space/" "Space1"
+#           wake_space "https://a123123sd-n8n-free.hf.space/" "Space2"
